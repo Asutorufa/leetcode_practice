@@ -16,20 +16,58 @@ Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807.
 */
 
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+
+// ListNode Definition for singly-linked list.
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	root := &ListNode{}
+	last := root
+	for tmp := 0; ; {
+		a, b := 0, 0
+		if l1 != nil {
+			a = l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			b = l2.Val
+			l2 = l2.Next
+		}
+		sum := tmp + a + b
+		tmp = sum / 10
+		last.Val = sum % 10
+		if l1 == nil && l2 == nil && tmp == 0 {
+			break
+		} else {
+			last.Next = &ListNode{}
+			last = last.Next
+		}
+	}
+	return root
+}
+
 func two() {
 	one := list.New()
-	one.PushBack(2)
-	one.PushBack(4)
-	one.PushBack(3)
+	one.PushBack(1)
+	one.PushBack(8)
+	// one.PushBack(3)
 	two := list.New()
-	two.PushBack(5)
-	two.PushBack(6)
-	two.PushBack(4)
+	two.PushBack(0)
+	// two.PushBack(5)
+	// two.PushBack(6)
+	// two.PushBack(4)
 	last := list.New()
 	for e, f, tmp := one.Front(), two.Front(), 0; ; {
-		if e == nil && f == nil {
-			break
-		}
 		a, b := 0, 0
 		if e != nil {
 			a = e.Value.(int)
@@ -43,6 +81,9 @@ func two() {
 		tmp = sum / 10
 		last.PushBack(sum % 10)
 		log.Println(a, b)
+		if e == nil && f == nil && tmp == 0 {
+			break
+		}
 	}
 	for e := last.Front(); e != nil; e = e.Next() {
 		log.Println(e.Value)
@@ -50,29 +91,5 @@ func two() {
 }
 
 func main() {
-	one()
 	two()
-}
-
-func one() {
-	var x = []int{2, 4, 3}
-	var y = []int{5, 6, 4}
-	z := []int{}
-	tmp := 0
-	if len(x) < len(y) {
-		tmp := x
-		x = y
-		y = tmp
-	}
-	for n := range x {
-		sum := 0
-		if n > len(y)-1 {
-			sum = tmp + x[n] + 0
-		} else {
-			sum = tmp + x[n] + y[n]
-		}
-		tmp = sum / 10
-		z = append(z, sum%10)
-	}
-	log.Println(z)
 }
