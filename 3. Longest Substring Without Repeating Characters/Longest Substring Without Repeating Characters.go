@@ -60,4 +60,8 @@ func main() {
 	lengthOfLongestSubstring(test4)
 	test5 := "dvdf"
 	lengthOfLongestSubstring(test5)
+	test6 := "abbbbba"
+	lengthOfLongestSubstring(test6)
+	test7 := "abcacdedghj"
+	lengthOfLongestSubstring(test7)
 }
