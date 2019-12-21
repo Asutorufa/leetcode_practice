@@ -33,7 +33,6 @@ func lengthOfLongestSubstring(s string) int {
 	for x := range s {
 		if bytes.IndexByte(out, s[x]) == -1 {
 			out = append(out, s[x])
-			// log.Println(string(out))
 			if len(out) > max {
 				max = len(out)
 				maxSubString = out
