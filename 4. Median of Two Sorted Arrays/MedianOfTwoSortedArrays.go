@@ -30,7 +30,7 @@ The median is (2 + 3)/2 = 2.5
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	m, n := len(nums1), len(nums2)
 	if m > n {
-		nums1, nums2, m, n = nums2, nums1, n, m
+		return findMedianSortedArrays(nums2, nums1)
 	}
 	if n == 0 {
 		panic("ValueError")
@@ -39,13 +39,11 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	for imin <= imax {
 		i := (imin + imax) / 2
 		j := halfLen - i
-		log.Println("i", i, "j", j)
 		if i < m && nums2[j-1] > nums1[i] {
 			imin = i + 1
 		} else if i > 0 && nums1[i-1] > nums2[j] {
 			imax = i - 1
 		} else {
-			log.Println(i, m)
 			var maxOfLeft int
 			var minOfRight int
 			if i == 0 {
@@ -111,7 +109,6 @@ func findMedianSortedArrays2(nums1 []int, nums2 []int) float64 {
 	if len(nums)%2 == 1 {
 		return float64(nums[len(nums)/2])
 	}
-	log.Println(nums[len(nums)/2-1], nums[len(nums)/2])
 	return (float64(nums[len(nums)/2-1]) + float64(nums[len(nums)/2])) / 2
 }
 
