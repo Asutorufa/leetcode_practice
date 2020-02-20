@@ -18,13 +18,10 @@ Output: "bb"
 */
 
 func longestPalindrome(s string) string {
-	if len(s) == 1 || len(s) == 0 {
-		return s
-	}
-	str, lenStr := string(s[0]), 0
+	str, lenStr := "", 0
 	for i := 0; i < len(s); i++ {
 		for x := len(s) - 1; x >= 0; x-- {
-			if i >= x {
+			if i > x {
 				break
 			}
 			if s[i] == s[x] {
@@ -60,5 +57,7 @@ func main() {
 	log.Println(longestPalindrome("cbbd"))
 	log.Println(longestPalindrome("aaaa"))
 	log.Println(longestPalindrome("abadd"))
+	log.Println(longestPalindrome(""))
+	log.Println(longestPalindrome("a"))
 
 }
