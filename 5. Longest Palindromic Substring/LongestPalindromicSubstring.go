@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"log"
+	"strings"
+)
 
 /*
 Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
@@ -87,6 +90,40 @@ func longestPalindromeExpandAroundCenter(s string) string {
 	return s[start : end+1]
 }
 
+/*
+ Manacher
+ less time,less memory
+ add symbol to string: like aba -> #a#b#a#  aa -> #a#a# make the string element's number from even to odd,then use Expand Around Center
+*/
+func longestPalindromeManacher(s string) string {
+	if s == "" {
+		return ""
+	}
+	ss := strings.Builder{}
+	for index := range s {
+		ss.WriteByte('#')
+		ss.WriteByte(s[index])
+	}
+	ss.WriteByte('#')
+	s = ss.String()
+	exandAroundCenter := func(s string, left, right int) int {
+		for left >= 0 && right < len(s) && s[left] == s[right] {
+			left--
+			right++
+		}
+		return right - left - 1
+	}
+	start, end := 0, 0
+	for i := 0; i < len(s); i++ {
+		lenS := exandAroundCenter(s, i, i)
+		if lenS > end-start {
+			start = i - (lenS-1)/2
+			end = i + lenS/2
+		}
+	}
+	return strings.ReplaceAll(s[start:end+1], "#", "")
+}
+
 func main() {
 	log.Println(longestPalindromeBruteForce("abacab"))
 	log.Println(longestPalindromeBruteForce("babad"))
@@ -104,5 +141,13 @@ func main() {
 	log.Println(longestPalindromeExpandAroundCenter("abadd"))
 	log.Println(longestPalindromeExpandAroundCenter(""))
 	log.Println(longestPalindromeExpandAroundCenter("a"))
+	log.Println(longestPalindromeManacher("abacab"))
+	log.Println(longestPalindromeManacher("babad"))
+	log.Println(longestPalindromeManacher("baabad"))
+	log.Println(longestPalindromeManacher("cbbd"))
+	log.Println(longestPalindromeManacher("aaaa"))
+	log.Println(longestPalindromeManacher("abadd"))
+	log.Println(longestPalindromeManacher(""))
+	log.Println(longestPalindromeManacher("a"))
 
 }
