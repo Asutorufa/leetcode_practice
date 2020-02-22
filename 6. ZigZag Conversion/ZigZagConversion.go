@@ -43,7 +43,7 @@ for example :
 	first covert the s to this:
 	numRows + numRows - 2, so every row is six char
 	0 1 2 3 4 5  <- index
-	0 1 2 3 2 1  <- if the index > (numRows + numRows - 2) / 2, so numRows + numRows - 2 - index
+	0 1 2 3 2 1  <- if the index > (numRows + numRows - 2) / 2, change the index to numRows + numRows - 2 - index
 	P A Y P A L
 	I S H I R I
 	N G
