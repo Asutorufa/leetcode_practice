@@ -39,7 +39,7 @@ func replaceSpace3(s string) string {
 			nowSize += 3
 		} else {
 			str[nowSize] = s[index]
-			nowSize += 1
+			nowSize++
 		}
 	}
 	return string(str)
@@ -61,6 +61,7 @@ func replaceSpace(s string) string {
 func replaceSpace2(s string) string {
 	return strings.ReplaceAll(s, " ", "%20")
 }
+
 func main() {
 	str := "We are happy."
 	log.Println(replaceSpace(str))
