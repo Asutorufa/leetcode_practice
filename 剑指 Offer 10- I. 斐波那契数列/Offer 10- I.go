@@ -56,16 +56,15 @@ func fib(n int) int { // Dynamic programming -> less time
 	return a[n]
 }
 
-func fib2(n int) int { // Dynamic programming => less time, less memory
+func fib2(n int) (b int) { // Dynamic programming => less time, less memory
 	if n == 0 {
-		return 0
+		b = 0
+	} else {
+		b = 1
 	}
-	if n == 1 {
-		return 1
-	}
-	a, b := 0, 1
+	a := 0
 	for i := 2; i <= n; i++ {
-		a, b = b, a+b
+		a, b = b, a+b // a = last b, b = last a + last b
 		b %= 1000000007
 	}
 	return b
@@ -74,10 +73,12 @@ func fib2(n int) int { // Dynamic programming => less time, less memory
 func main() {
 	fmt.Println(fib(2))
 	fmt.Println(fib(5))
+	fmt.Println(fib(7))
 	fmt.Println(fib(43))
 	fmt.Println(fib(45))
 	fmt.Println(fib2(2))
 	fmt.Println(fib2(5))
+	fmt.Println(fib2(7))
 	fmt.Println(fib2(43))
 	fmt.Println(fib2(45))
 }
