@@ -67,7 +67,6 @@ func myPow2(x float64, n int) (res float64) {
 	if !s {
 		return 1 / res
 	}
-
 	return
 }
 
@@ -79,5 +78,4 @@ func main() {
 	fmt.Println(myPow2(2.0, 10))
 	fmt.Println(myPow2(2.1, 3))
 	fmt.Println(myPow2(2.0, -2))
-
 }
