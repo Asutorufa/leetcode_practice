@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 /**
@@ -88,31 +87,34 @@ func isMatch(s string, p string) bool {
 	for index := range dp {
 		dp[index] = make([]bool, pl+1)
 	}
-	for i := 0; i <= sl; i++ {
-		for j := 0; j <= pl; j++ {
+	for i := 0; i <= sl; i++ { // s的当前长度
+		for j := 0; j <= pl; j++ { // p的当前长度
 			if j == 0 {
+				// 当s和p长度都为零时, 肯定匹配成功
 				dp[i][j] = i == 0
 				continue
 			}
-			if p[j-1] != '*' {
-				if i > 0 && (s[i-1] == p[j-1] || p[j-1] == '.') {
-					dp[i][j] = dp[i-1][j-1]
+			if p[j-1] != '*' { // 当b不为 * 时, 注:(j-1是指长度为j的元素, 因为数组是从0开始的, 所以需要-1)
+				if i > 0 && (s[i-1] == p[j-1] || p[j-1] == '.') { // 判断是否与s中的字符串匹配(相等或为.)
+					dp[i][j] = dp[i-1][j-1] // 因为当前的已经匹配成功(看if条件)了, 所以这里的结果是之前的所有字符串是否被匹配成功
 				}
 				continue
 			}
-			if j >= 2 {
-				dp[i][j] = dp[i][j-2]
+			// 这之后是 p[j-1]='*'
+			if j >= 2 && dp[i][j-2] { // 如果j>=2 注: 这里是指s中的当前字符不是b中*重复的字符, 所以直接看面的是否匹配成功
+				dp[i][j] = dp[i][j-2] // 根据前面的判断, 因为这里是x*, 占两个位置, 所以应该j-2
+				// 这里不太好理解 注意看i, i是没有进行加减的, 所以是指看s[i-1]是否与p[i-1]之前的匹配成功
+				continue
 			}
-			if i >= 1 && j >= 2 && (s[i-1] == p[j-2] || p[j-2] == '.') {
-				dp[i][j] = dp[i][j] || dp[i-1][j]
+			if i >= 1 && j >= 2 && (s[i-1] == p[j-2] || p[j-2] == '.') { // s中的当前字符是b中*重复的字符, 或b重复的直接是.
+				dp[i][j] = dp[i-1][j] //看s前一个是否匹配成功, 解释与98行类似
 			}
-
 		}
 	}
-	log.Println(dp)
 	return dp[sl][pl]
 }
 
 func main() {
+	fmt.Println(isMatch("ab", ".*"))
 	fmt.Println(isMatch("ab", "aa*bb*"))
 }
