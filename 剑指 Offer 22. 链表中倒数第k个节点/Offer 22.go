@@ -28,7 +28,7 @@ type ListNode struct {
 
 /**
 双指针: 相当巧妙的解法, 想不到
-第一个指针先走k步, 然后两个指针同时走, 当第一个指针走到链表未是返回第二个就行了
+第一个指针先走k步, 然后两个指针同时走, 当第一个指针走到链表未时返回第二个就行了
 */
 func getKthFromEnd(head *ListNode, k int) *ListNode {
 	var f *ListNode = head
