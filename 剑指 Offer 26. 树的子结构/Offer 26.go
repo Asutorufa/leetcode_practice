@@ -41,6 +41,7 @@ B是A的子结构， 即 A中有出现和B相同的结构和节点值。
  * }
  */
 
+// TreeNode tree node
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
