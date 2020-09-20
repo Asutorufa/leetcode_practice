@@ -62,7 +62,7 @@ A -> 小端堆 B -> 大端堆
 
 addNum(num) 函数：
 
-    当 m=n（即 NNN 为 偶数）：需向 A 添加一个元素。实现方法：将新元素 num 插入至 B ，再将 B 堆顶元素插入至 A ；
+    当 m=n（即 N 为 偶数）：需向 A 添加一个元素。实现方法：将新元素 num 插入至 B ，再将 B 堆顶元素插入至 A ；
     当 m!=n（即 N 为 奇数）：需向 B 添加一个元素。实现方法：将新元素 num 插入至 A ，再将 A 堆顶元素插入至 B ；
 
 	假设插入数字 num 遇到情况 1. 。由于 num 可能属于 “较小的一半” （即属于 B ），
@@ -70,7 +70,7 @@ addNum(num) 函数：
 	再将 B堆顶元素插入至 A 。这样就可以始终保持 A 保存较大一半、 B 保存较小一半。
 
 findMedian() 函数：
-    当 m=n（ NNN 为 偶数）：则中位数为 ( A 的堆顶元素 + B 的堆顶元素 )/2。
+    当 m=n（ N 为 偶数）：则中位数为 ( A 的堆顶元素 + B 的堆顶元素 )/2。
     当 m!=n（ N 为 奇数）：则中位数为 A 的堆顶元素。
 */
 func (this *MedianFinder) AddNum(num int) {
@@ -132,9 +132,7 @@ func (this *MedianFinder) AddNum2(num int) {
 		}
 
 		if num >= this.nums[i] && num < this.nums[i+1] {
-			// if i == 0 {
 			i++
-			// }
 			var pre = make([]int, i)
 			var last = make([]int, l-i)
 			copy(pre, this.nums[:i])
@@ -289,5 +287,4 @@ func main() {
 	heap.Push(lowerTest, 3)
 	fmt.Println(heap.Pop(lowerTest))
 	fmt.Println(heap.Pop(lowerTest))
-
 }
