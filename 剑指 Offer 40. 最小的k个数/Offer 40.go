@@ -32,7 +32,9 @@ func getLeastNumbers2(arr []int, k int) []int {
 使用快速排序
 */
 func getLeastNumbers3(arr []int, k int) (res []int) {
-	return fastSort(arr)[:k]
+	fastSort2(0, len(arr)-1, arr)
+	return arr[:k]
+	// return fastSort(arr)[:k]
 }
 
 func fastSort(arr []int) []int {
@@ -91,6 +93,29 @@ func fastSort(arr []int) []int {
 	return arr
 }
 
+// 比自己的写的快速排序简单多了
+func fastSort2(left, right int, arr []int) {
+	if left > right {
+		return
+	}
+	// fmt.Println(arr, left, right)
+
+	low, high := left, right
+	target := arr[left]
+	for left < right {
+		for left < right && arr[right] >= target {
+			right--
+		}
+		for left < right && arr[left] <= target {
+			left++
+		}
+		arr[right], arr[left] = arr[left], arr[right]
+	}
+	arr[left], arr[low] = arr[low], arr[left]
+	fastSort2(low, left-1, arr)
+	fastSort2(right+1, high, arr)
+}
+
 // 利用堆实现 小端堆
 func getLeastNumbers(arr []int, k int) (res []int) {
 	x := &heapI{}
@@ -134,10 +159,18 @@ func main() {
 	fmt.Println(getLeastNumbers2([]int{56, 7, 7, 4, 54, 4}, 3))
 	fmt.Println(getLeastNumbers3([]int{56, 7, 7, 4, 54, 4}, 3))
 
-	fmt.Println("\nfastOpen Test ")
+	fmt.Println("\nfastSort2 Test ")
 	fmt.Println(fastSort([]int{2, 1, 1, 2}))
 	fmt.Println(fastSort([]int{3, 1, 1, 2, 5}))
 	fmt.Println(fastSort([]int{3, 1, 1, 2, 2, 5}))
 	fmt.Println(fastSort([]int{3, 1, 1, 2, 98, 97, 2, 5, 55, 63}))
 	fmt.Println(fastSort([]int{3, 1, 1, 2, 96, 98, 97, 2, 5, 55, 63}))
+
+	fmt.Println("\nfastSort2 Test")
+	arr := []int{3, 1, 1, 2, 98, 97, 2, 5, 55, 63}
+	fastSort2(0, len(arr)-1, arr)
+	fmt.Println(arr)
+	arr = []int{3, 1, 1, 2, 96, 98, 97, 2, 5, 55, 63}
+	fastSort2(0, len(arr)-1, arr)
+	fmt.Println(arr)
 }
