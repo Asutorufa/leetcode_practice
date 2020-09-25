@@ -88,13 +88,13 @@ func reversePairs(arr []int) int {
 }
 
 func sorttCount(arr []int, left, right int, tmp []int) int {
-	if left < right {
-		mid := (left + right) / 2
-		return sorttCount(arr, left, mid, tmp) + // 分治法 -> 先分
-			sorttCount(arr, mid+1, right, tmp) + // 分治法 -> 先分
-			mergeCount(arr, left, mid, right, tmp) // 分治法 -> 后治
+	if left >= right {
+		return 0
 	}
-	return 0
+	mid := (left + right) / 2
+	return sorttCount(arr, left, mid, tmp) + // 分治法 -> 先分
+		sorttCount(arr, mid+1, right, tmp) + // 分治法 -> 先分
+		mergeCount(arr, left, mid, right, tmp) // 分治法 -> 后治
 }
 
 // 魔改版分治法
@@ -107,6 +107,9 @@ func mergeCount(arr []int, left, mid, right int, tmp []int) int {
 			tmp[t] = arr[i]
 			i++
 			res += j - (mid + 1) // 因为是已经排序好的数组, 所以当发现小于时, 应该比前面所有都小
+			// 此时 arr[i] 比 arr[j] 小，把 arr[i] 对应的数加入tmp中，
+			// 并考虑它对逆序对总数的贡献为 j 相对 右边 首位置的偏移 mid+1（即右边只有x个数比 arr[j] 小，
+			// 所以只有它和x个数构成逆序数列），以此类推。
 		} else {
 			tmp[t] = arr[j] // 大于时不需要管
 			j++
