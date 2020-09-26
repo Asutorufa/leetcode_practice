@@ -37,35 +37,35 @@ import (
  * }
  */
 
-type TreeNode struct{
-	Val int
-	Left *TreeNode
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
 	Right *TreeNode
 }
 
 // 简单题 魔改中序遍历 一次性写出来了
 func kthLargest(root *TreeNode, k int) int {
 	val := new(int)
-	search(root,k,val,new(int))
+	search(root, k, val, new(int))
 	return *val
 }
 
-func search(r *TreeNode,k int,res,now *int){
+func search(r *TreeNode, k int, res, now *int) {
 	if r == nil {
 		return
 	}
-	search(r.Right,k,res,now)
+	search(r.Right, k, res, now)
 	*now++
-	if *now > k{
+	if *now > k {
 		return
 	}
-	if *now == k{
-		*res =r.Val
+	if *now == k {
+		*res = r.Val
 		// fmt.Println("find ",k,r.Val)
 		return
 	}
 	// fmt.Println(r.Val)
-	search(r.Left,k,res,now)
+	search(r.Left, k, res, now)
 }
 
 func create(a []int, k int) *TreeNode {
@@ -83,12 +83,12 @@ func create(a []int, k int) *TreeNode {
 	return root
 }
 
-func main(){
+func main() {
 	a := new(int)
-	search(create([]int{5,3,6,2,4,0,0,1},0),4,a,new(int))
+	search(create([]int{5, 3, 6, 2, 4, 0, 0, 1}, 0), 4, a, new(int))
 	fmt.Println(*a)
 	fmt.Println()
-	fmt.Println(kthLargest(create([]int{5,3,6,2,4,0,0,1},0),3))
+	fmt.Println(kthLargest(create([]int{5, 3, 6, 2, 4, 0, 0, 1}, 0), 3))
 	fmt.Println()
-	fmt.Println(kthLargest(create([]int{3,1,4,0,2},0),1))
+	fmt.Println(kthLargest(create([]int{3, 1, 4, 0, 2}, 0), 1))
 }
