@@ -36,7 +36,7 @@ func singleNumbers(nums []int) []int {
 	for index := range nums {
 		k ^= nums[index]
 	}
-	fmt.Println(k)
+	// fmt.Println(k)
 
 	//设置mask为1，则二进制为0001
 	// mask是一个二进制数，且其中只有一位是1，其他位全是0，比如000010，
@@ -49,9 +49,9 @@ func singleNumbers(nums []int) []int {
 	// 之后就可以用mask来将数组里的两个数分区分开
 	for mask&k == 0 {
 		mask <<= 1
-		fmt.Printf("%b %b\n", mask, k)
+		// fmt.Printf("%b %b\n", mask, k)
 	}
-	fmt.Println(mask)
+	// fmt.Println(mask)
 
 	a, b := 0, 0
 	for index := range nums {
@@ -62,7 +62,7 @@ func singleNumbers(nums []int) []int {
 			b ^= nums[index]
 		}
 	}
-	fmt.Println(a, b)
+	// fmt.Println(a, b)
 	return []int{a, b}
 }
 
