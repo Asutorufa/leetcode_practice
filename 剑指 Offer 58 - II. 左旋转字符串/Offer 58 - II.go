@@ -41,8 +41,10 @@ func reverseLeftWords2(s string, n int) string {
 }
 
 func main() {
+	fmt.Println("Test Slice")
 	fmt.Println(reverseLeftWords("abcdefg", 2))
 	fmt.Println(reverseLeftWords("lrloseumgh", 6))
+	fmt.Println("\nTest Range")
 	fmt.Println(reverseLeftWords2("abcdefg", 2))
 	fmt.Println(reverseLeftWords2("lrloseumgh", 6))
 }
