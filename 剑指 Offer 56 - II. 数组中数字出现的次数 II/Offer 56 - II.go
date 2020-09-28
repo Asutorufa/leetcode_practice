@@ -56,7 +56,7 @@ func singleNumber(nums []int) int {
 2个1：0 1
 3个1：0 0
 
-一下公式由来题解:
+以下公式由来题解:
 	[](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/solution/zhuang-tai-ji-jie-jue-ci-wen-ti-xiang-jie-shu-zi-d/)
 */
 func singleNumber2(nums []int) int {
