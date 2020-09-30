@@ -22,7 +22,10 @@ import "fmt"
 // 大于target就左边界减少 小于target就扩大右边界
 // 从题目中的例子可以知道 左边界最大不会超过target/2 所以左边界到target/2就行了
 func findContinuousSequence(target int) (res [][]int) {
-	i, j := 0, 0
+	i, j := 1, 0 // 因为是正整数, 所以应该初始化为 1
+	// 区别1：right初值为0，不是 不取right版本中 的1，也不是2。
+	//        因为代码中，单纯是通过 sum +=right来增加right，所以必须保证right经过1
+	//        而取right的代码中，是先right++,sum +=right , 因此right初值只能为0
 	sum := 0
 	for i <= target/2 {
 		if sum < target {
